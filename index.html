@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Jakobs Kebab!</title>
+    <title>Jakobs Kebab</title>
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
@@ -70,11 +70,14 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             z-index: 999;
+            text-align: center;
+            position: relative;
         }
 
         .popup img {
             width: 100%;
             height: auto;
+            margin-bottom: 20px;
         }
 
         .close-btn {
@@ -92,12 +95,27 @@
         .close-btn:hover {
             background-color: #45a049;
         }
+
+        .nav-btn {
+            font-size: 1.5em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px 20px;
+            margin: 0 10px;
+        }
+
+        .nav-btn:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Welcome to Jakobs Kebab!</h1>
+        <h1>Välkommen till Jakobs Kebab!</h1>
     </header>
 
     <!-- Separate button outside of the black background -->
@@ -107,18 +125,42 @@
     <div class="popup" id="popupContainer">
         <button class="close-btn" onclick="closePopup()">Close</button>
         <img src="https://dms-api.ntm.eu/api/v1/images/jovkw98r/smart/width/980/height/551/as/jpeg/redirect"
-            alt="Popup Image">
+            alt="Popup Image" id="popupImage">
+        <button class="nav-btn" onclick="changeImage(-1)">Previous</button>
+        <button class="nav-btn" onclick="changeImage(1)">Next</button>
     </div>
 
     <script>
+        var currentImageIndex = 0;
+        var imageArray = [
+            "https://dms-api.ntm.eu/api/v1/images/jovkw98r/smart/width/980/height/551/as/jpeg/redirect",
+            "https://www.government.se/globalassets/regeringen/bilder/socialdepartementet/statsrad-och-statssekreterare/jakob-forssmed.jpg?width=712&rmode=crop&heightratio=0.667&quality=85"
+        ];
+
         function showPopup() {
-            // Display the popup
             document.getElementById('popupContainer').style.display = 'block';
+            showCurrentImage();
         }
 
         function closePopup() {
-            // Close the popup
             document.getElementById('popupContainer').style.display = 'none';
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+
+            if (currentImageIndex < 0) {
+                currentImageIndex = imageArray.length - 1;
+            } else if (currentImageIndex >= imageArray.length) {
+                currentImageIndex = 0;
+            }
+
+            showCurrentImage();
+        }
+
+        function showCurrentImage() {
+            var popupImage = document.getElementById('popupImage');
+            popupImage.src = imageArray[currentImageIndex];
         }
     </script>
 </body>
