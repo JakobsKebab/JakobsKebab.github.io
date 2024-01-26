@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jakobs Kebab</title>
+    <title>Welcome to Jakobs Kebab!</title>
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
@@ -76,24 +76,49 @@
             width: 100%;
             height: auto;
         }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 
 <body>
     <header>
         <h1>Welcome to Jakobs Kebab!</h1>
-        <button onclick="showPopup()">Bilder</button>
     </header>
+
+    <!-- Separate button outside of the black background -->
+    <button onclick="showPopup()">Bilder</button>
 
     <!-- Popup container -->
     <div class="popup" id="popupContainer">
-        <img src="https://dms-api.ntm.eu/api/v1/images/jovkw98r/smart/width/980/height/551/as/jpeg/redirect" alt="Popup Image">
+        <button class="close-btn" onclick="closePopup()">Close</button>
+        <img src="https://dms-api.ntm.eu/api/v1/images/jovkw98r/smart/width/980/height/551/as/jpeg/redirect"
+            alt="Popup Image">
     </div>
 
     <script>
         function showPopup() {
             // Display the popup
             document.getElementById('popupContainer').style.display = 'block';
+        }
+
+        function closePopup() {
+            // Close the popup
+            document.getElementById('popupContainer').style.display = 'none';
         }
     </script>
 </body>
